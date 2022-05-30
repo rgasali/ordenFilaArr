@@ -15,7 +15,8 @@ function generarFila(arrAuxiliar: number[], largo: number) {
 
 function generarMatriz(matriz: any[], filas: number, columnas: number) {
   for (let i = 0; i < filas; i++) {
-    matriz.push(generarFila(arrAuxiliar, columnas));
+    //matriz.push(generarFila(arrAuxiliar, columnas));
+    matriz[i] = [generarFila(arrAuxiliar, columnas)];
   }
 }
 
@@ -63,8 +64,9 @@ btnCrearMatriz.addEventListener("click", () => {
     Number(prompt("ingrese la cantidad de filas para la matriz")),
     Number(prompt("ingrese la cantidad de columnas para la matriz"))
   );
+
   ValorarFila(miMatriz, arrValoresFila);
   ordenarFilasDescendentes(miMatriz, arrValoresFila);
   console.log(miMatriz);
-  //mostrarMatriz.innerHTML(miMatriz)
+  mostrarMatriz.innerHTML = String(miMatriz);
 });
