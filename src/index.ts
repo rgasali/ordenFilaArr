@@ -5,12 +5,15 @@ let mostrarMatriz = <HTMLDivElement>document.getElementById("mostrarMatriz");
 let miMatriz: number[][] = new Array();
 let arrValoresFila: number[] = new Array();
 let arrAuxiliar: number[] = new Array();
+let filas: number = 0;
+let columnas: number = 0;
 
 function generarFila(arrAuxiliar: number[], largo: number) {
+  let arregloInterno: number[] = new Array();
   for (let i = 0; i < largo; i++) {
-    arrAuxiliar.push(Number(prompt("ingrese un valor")));
+    arregloInterno.push(Number(prompt("ingrese un valor")));
   }
-  return arrAuxiliar;
+  return arregloInterno;
 }
 
 function generarMatriz(matriz: any[], filas: number, columnas: number) {
@@ -58,15 +61,25 @@ function ordenarFilasDescendentes(matriz: any[], arregloDeValores: number[]) {
   }
 }
 
+function mostrarFormatoMatriz(matriz: any[]) {
+  let palabra = "";
+  for (let i = 0; i < filas; i++) {
+    for (let j = 0; j < columnas - 1; j++) {
+      palabra += matriz[[i][j]];
+      palabra += ",";
+    }
+    palabra += "<br/>";
+  }
+  return palabra;
+}
+
 btnCrearMatriz.addEventListener("click", () => {
-  generarMatriz(
-    miMatriz,
-    Number(prompt("ingrese la cantidad de filas para la matriz")),
-    Number(prompt("ingrese la cantidad de columnas para la matriz"))
-  );
+  filas = Number(prompt("ingrese la cantidad de filas para la matriz"));
+  columnas = Number(prompt("ingrese la cantidad de columnas para la matriz"));
+  generarMatriz(miMatriz, filas, columnas);
 
   ValorarFila(miMatriz, arrValoresFila);
   ordenarFilasDescendentes(miMatriz, arrValoresFila);
   console.log(miMatriz);
-  mostrarMatriz.innerHTML = String(miMatriz);
+  mostrarMatriz.innerHTML = String(mostrarFormatoMatriz(miMatriz));
 });
